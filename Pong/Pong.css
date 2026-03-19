@@ -73,32 +73,42 @@ h1 {
     }
 }
 
-/* 🔥 Boutons tactiles */
+
+/* Boutons tactiles */
 #touchControls {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 30px;
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    gap: 15px;
+    justify-content: space-between;
+    padding: 0 25px;
     z-index: 999;
 }
 
+/* Style des boutons */
 #touchControls button {
-    width: 80px;
-    height: 80px;
-    font-size: 32px;
-    border-radius: 12px;
+    width: 90px;          /* plus gros */
+    height: 90px;         /* plus gros */
+    border-radius: 20px;
     border: none;
-    background: rgba(255,255,255,0.15);
-    color: white;
-    backdrop-filter: blur(4px);
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(6px);
     cursor: pointer;
+    transition: 0.15s;
 }
 
+/* Effet quand on appuie */
 #touchControls button:active {
     background: rgba(255,255,255,0.35);
 }
+
+/* Cacher sur PC */
+@media (min-width: 601px) {
+    #touchControls {
+        display: none;
+    }
+}
+
 
 /* Cacher sur PC */
 @media (min-width: 602px) {

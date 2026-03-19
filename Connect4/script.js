@@ -7,7 +7,7 @@ const ROWS = 6;
 const COLS = 7;
 
 function getCellSize() {
-    return canvas.width / COLS;
+    return canvas.width / COLS; // 570 / 7
 }
 
 let board = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
@@ -19,24 +19,24 @@ const scoreLabel = document.getElementById("score");
 const replayBtn = document.getElementById("replay");
 const statusLabel = document.getElementById("status");
 
-/* 🔥 Sauvegarde des victoires (1 victoire = gagner 5 manches) */
-function saveMatchWin() {
-    let wins = Number(localStorage.getItem("wins_connect4") || 0);
-    localStorage.setItem("wins_connect4", wins + 1);
-}
-
-/* --------- Gestion des entrées (PC + mobile, sans décalage ni double coup) --------- */
+/* ------------------ CLICK + TOUCH FIX ------------------ */
 
 let touchUsed = false;
 
 function getColumnFromClientX(clientX) {
     const rect = canvas.getBoundingClientRect();
-    const x = clientX - rect.left;
-    const colWidth = rect.width / COLS;
-    return Math.floor(x / colWidth);
+
+    // Position du doigt dans l'écran
+    const xScreen = clientX - rect.left;
+
+    // Conversion en coordonnées du canvas (570px)
+    const xCanvas = xScreen * (canvas.width / rect.width);
+
+    const CELL = getCellSize();
+    return Math.floor(xCanvas / CELL);
 }
 
-/* Clic (PC) */
+/* PC */
 canvas.addEventListener("click", e => {
     if (touchUsed) return;
     if (!playerTurn || gameOver) return;
@@ -45,7 +45,7 @@ canvas.addEventListener("click", e => {
     dropPiece(col, 1);
 });
 
-/* Touch (mobile) */
+/* MOBILE */
 canvas.addEventListener("touchstart", e => {
     touchUsed = true;
     e.preventDefault();
@@ -59,7 +59,7 @@ canvas.addEventListener("touchstart", e => {
     setTimeout(() => touchUsed = false, 120);
 }, { passive: false });
 
-/* ---------------------------------------------------------------------- */
+/* -------------------------------------------------------- */
 
 replayBtn.onclick = () => {
     replayBtn.style.display = "none";
