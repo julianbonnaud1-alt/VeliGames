@@ -40,6 +40,10 @@ let player2Score = 0;
 let zPressed = false;
 let sPressed = false;
 
+// 🔥 États tactiles
+let touchUp = false;
+let touchDown = false;
+
 let waitingForStart = true;
 let gameOver = false;
 
@@ -111,9 +115,9 @@ function update() {
     if (gameOver) return;
     if (waitingForStart) return;
 
-    // Déplacement joueur
-    if (zPressed) paddle1Y -= PADDLE_SPEED;
-    if (sPressed) paddle1Y += PADDLE_SPEED;
+    // 🔥 Déplacement joueur (clavier + tactile)
+    if (zPressed || touchUp) paddle1Y -= PADDLE_SPEED;
+    if (sPressed || touchDown) paddle1Y += PADDLE_SPEED;
 
     paddle1Y = Math.max(0, Math.min(HEIGHT - PADDLE_HEIGHT, paddle1Y));
 
@@ -212,6 +216,7 @@ function loop() {
     requestAnimationFrame(loop);
 }
 
+/* 🎮 Clavier */
 document.addEventListener("keydown", e => {
 
     if (e.key === "z") {
@@ -239,6 +244,21 @@ document.addEventListener("keydown", e => {
 document.addEventListener("keyup", e => {
     if (e.key === "z") zPressed = false;
     if (e.key === "s") sPressed = false;
+});
+
+/* 🎮 Tactile */
+document.getElementById("btnUp").addEventListener("touchstart", () => {
+    touchUp = true;
+});
+document.getElementById("btnUp").addEventListener("touchend", () => {
+    touchUp = false;
+});
+
+document.getElementById("btnDown").addEventListener("touchstart", () => {
+    touchDown = true;
+});
+document.getElementById("btnDown").addEventListener("touchend", () => {
+    touchDown = false;
 });
 
 resetGame();
