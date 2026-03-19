@@ -63,16 +63,18 @@ h1 {
     left: 0;
     width: 100%;
     display: flex;
+	align-items: center;
     justify-content: space-between; /* un à gauche, un à droite */
-    padding: 0 25px;
+    padding: 0 10px;
+	box-sizing: border-box;
     z-index: 9999; /* toujours devant */
 }
 
 /* STYLE DES BOUTONS */
 #touchControls button {
-    width: 120px;      /* très gros */
-    height: 120px;     /* très gros */
-    border-radius: 25px;
+    width: 100px;      /* très gros */
+    height: 100px;     /* très gros */
+    border-radius: 20px;
     border: none;
     background: rgba(255,255,255,0.18);
     backdrop-filter: blur(8px);
