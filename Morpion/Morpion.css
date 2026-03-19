@@ -2,12 +2,12 @@ body {
     font-family: 'Segoe UI', Arial, sans-serif;
     color: #FFFFFF;
     text-align: center;
-	height: 100%;
+    height: 100%;
     margin: 0;
     padding: 0;
-	background-attachment: fixed;
-	overflow: hidden;
-	background-color: #1a1a1a;
+    background-attachment: fixed;
+    overflow: hidden;
+    background-color: #1a1a1a;
     background-image:
         linear-gradient(#2d2d2d 1px, transparent 1px),
         linear-gradient(90deg, #2d2d2d 1px, transparent 1px),
@@ -15,11 +15,13 @@ body {
     background-size: 40px 40px, 40px 40px, 80px 80px;
     animation: pixelMove 12s linear infinite;
 }
+
 @keyframes pixelMove {
     0% { background-position: 0 0, 0 0, 0 0; }
     50% { background-position: 40px 40px, 40px 40px, 80px 80px; }
     100% { background-position: 0 0, 0 0, 0 0; }
 }
+
 h1 {
     margin-top: 20px;
     margin-bottom: 10px;
@@ -45,7 +47,6 @@ h1 {
     transform: scale(1.05);
 }
 
-
 #status {
     font-size: 26px;
     font-weight: bold;
@@ -53,6 +54,7 @@ h1 {
     min-height: 30px;
 }
 
+/* Plateau */
 #board {
     width: 510px;
     height: 510px;
@@ -62,6 +64,7 @@ h1 {
     grid-template-rows: repeat(3, 170px);
 }
 
+/* Cases */
 .cell {
     width: 170px;
     height: 170px;
@@ -76,25 +79,30 @@ h1 {
     cursor: pointer;
     transition: background 0.2s, transform 0.15s;
 }
+
 .cell:hover {
     background: #f1f1f1;
     transform: scale(1.05);
 }
 
+/* Animation victoire */
 @keyframes blink {
     0%   { background-color: yellow; }
     50%  { background-color: white; }
     100% { background-color: yellow; }
 }
+
 .win {
     animation: blink 0.5s infinite;
 }
 
+/* Replay */
 #replay-container {
     width: 100%;
     display: flex;
     justify-content: center;
 }
+
 #replay {
     margin-top: 15px;
     padding: 12px 20px;
@@ -106,20 +114,39 @@ h1 {
     cursor: pointer;
     font-weight: bold;
 }
+
 #replay:hover {
     background: #1864ab;
 }
 
+/* Score */
 #score {
     margin-top: 15px;
     font-size: 22px;
     font-weight: bold;
 }
 
-
+/* 📱 Mobile */
 @media (max-width: 600px) {
-    canvas {
-        width: 100% !important;
-        height: auto !important;
+
+    h1 {
+        font-size: 40px;
+    }
+
+    #status {
+        font-size: 20px;
+    }
+
+    #board {
+        width: 90vw;
+        height: 90vw;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+    }
+
+    .cell {
+        width: 100%;
+        height: 100%;
+        font-size: 12vw;
     }
 }

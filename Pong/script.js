@@ -246,10 +246,23 @@ document.addEventListener("keyup", e => {
     if (e.key === "s") sPressed = false;
 });
 
-/* 🎮 Tactile */
 document.getElementById("btnUp").addEventListener("touchstart", () => {
     touchUp = true;
+
+    // 🔥 Lancer la balle avec le bouton ▲
+    if (waitingForStart && !gameOver) {
+        waitingForStart = false;
+        gameText.textContent = "";
+
+        const angles = [-20, 0, 20];
+        const offset = angles[Math.floor(Math.random() * angles.length)];
+        const angleRad = offset * Math.PI / 180;
+
+        ballXSpeed = Math.cos(angleRad) * ballSpeed;
+        ballYSpeed = Math.sin(angleRad) * ballSpeed;
+    }
 });
+
 document.getElementById("btnUp").addEventListener("touchend", () => {
     touchUp = false;
 });
