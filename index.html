@@ -91,10 +91,10 @@
             const baseText =
                 `<span>TicTacToe: ${TicTacToe} wins</span>` +
                 `<span>Connect Four: ${connect4} wins</span>` +
-                `<span>Pong: ${pong} wins</span>` +
-                `<span>Simon: ${simon} levels</span>` +
-                `<span>Aim Trainer: ${aim} score</span>` +
-                `<span>Naval Battle: ${naval} wins</span>`;
+                `<span>Pong: ${pong} wins</span>`;
+               <!-- `<span>Simon: ${simon} levels</span>` +
+               <!-- `<span>Aim Trainer: ${aim} score</span>` +
+               <!-- `<span>Naval Battle: ${naval} wins</span>`;
 
 		document.getElementById("scoreText").innerHTML = baseText + baseText;        }
 	
@@ -105,9 +105,9 @@
 		localStorage.removeItem("wins_TicTacToe");
 		localStorage.removeItem("wins_connect4");
 		localStorage.removeItem("wins_pong");
-		localStorage.removeItem("wins_simon");
-		localStorage.removeItem("wins_aim");
-		localStorage.removeItem("wins_naval");
+		<!--localStorage.removeItem("wins_simon");
+		<!--localStorage.removeItem("wins_aim");
+		<!--localStorage.removeItem("wins_naval");
 
 		loadScores(); // recharge la bande défilante
 	}
@@ -141,9 +141,9 @@ function tryReset() {
         localStorage.removeItem("wins_TicTacToe");
         localStorage.removeItem("wins_connect4");
         localStorage.removeItem("wins_pong");
-        localStorage.removeItem("wins_simon");
-        localStorage.removeItem("wins_aim");
-        localStorage.removeItem("wins_naval");
+        <!--localStorage.removeItem("wins_simon");
+        <!--localStorage.removeItem("wins_aim");
+        <!--localStorage.removeItem("wins_naval");
 
         loadScores();
         alert("Scores reset!");
