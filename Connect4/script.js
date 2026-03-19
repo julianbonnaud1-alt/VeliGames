@@ -5,7 +5,11 @@ const ctx = canvas.getContext("2d");
 
 const ROWS = 6;
 const COLS = 7;
-const CELL = canvas.width / COLS;
+
+// ⚠️ CELL doit être recalculé dynamiquement (canvas responsive)
+function getCellSize() {
+    return canvas.width / COLS;
+}
 
 let board = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
 let playerTurn = true;
@@ -23,18 +27,37 @@ function saveMatchWin() {
     localStorage.setItem("wins_connect4", wins + 1);
 }
 
-/* ----------- CLIC FIXE ----------- */
-canvas.addEventListener("click", e => {
-    if (!playerTurn || gameOver) return;
+/* ---------------------------------------------------------
+   🎮 CLIC + TOUCHSTART (corrigé pour mobile)
+--------------------------------------------------------- */
 
+function getColumnFromEvent(e) {
     const rect = canvas.getBoundingClientRect();
     const x = e.clientX - rect.left;
 
+    const CELL = getCellSize();
+    return Math.floor(x / CELL);
+}
+
+canvas.addEventListener("click", e => {
+    if (!playerTurn || gameOver) return;
+    const col = getColumnFromEvent(e);
+    dropPiece(col, 1);
+});
+
+canvas.addEventListener("touchstart", e => {
+    if (!playerTurn || gameOver) return;
+
+    const touch = e.touches[0];
+    const rect = canvas.getBoundingClientRect();
+    const x = touch.clientX - rect.left;
+
+    const CELL = getCellSize();
     const col = Math.floor(x / CELL);
 
     dropPiece(col, 1);
 });
-/* -------------------------------- */
+/* --------------------------------------------------------- */
 
 replayBtn.onclick = () => {
     replayBtn.style.display = "none";
@@ -47,7 +70,7 @@ function resetBoard() {
     // 🔥 Si le joueur a gagné 5 manches → 1 victoire enregistrée
     if (scorePlayer >= 5) {
         statusLabel.textContent = "CONGRATULATIONS! You've won!";
-        saveMatchWin(); // ← victoire enregistrée
+        saveMatchWin();
         return;
     }
 
@@ -66,6 +89,7 @@ function resetBoard() {
 function drawBoard() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+    const CELL = getCellSize();
     const radius = CELL * 0.37;
 
     for (let r = 0; r < ROWS; r++) {
@@ -101,6 +125,7 @@ function dropPiece(col, player) {
     const row = getRow(col);
     if (row === -1) return;
 
+    const CELL = getCellSize();
     let y = 0;
     const targetY = row * CELL;
     const radius = CELL * 0.37;
