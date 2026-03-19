@@ -6,7 +6,6 @@ const ctx = canvas.getContext("2d");
 const ROWS = 6;
 const COLS = 7;
 
-// ⚠️ CELL doit être recalculé dynamiquement (canvas responsive)
 function getCellSize() {
     return canvas.width / COLS;
 }
@@ -14,7 +13,6 @@ function getCellSize() {
 let board = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
 let playerTurn = true;
 let scorePlayer = 0, scoreBot = 0;
-
 let gameOver = false;
 
 const scoreLabel = document.getElementById("score");
@@ -27,37 +25,41 @@ function saveMatchWin() {
     localStorage.setItem("wins_connect4", wins + 1);
 }
 
-/* ---------------------------------------------------------
-   🎮 CLIC + TOUCHSTART (corrigé pour mobile)
---------------------------------------------------------- */
+/* --------- Gestion des entrées (PC + mobile, sans décalage ni double coup) --------- */
 
-function getColumnFromEvent(e) {
+let touchUsed = false;
+
+function getColumnFromClientX(clientX) {
     const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-
-    const CELL = getCellSize();
-    return Math.floor(x / CELL);
+    const x = clientX - rect.left;
+    const colWidth = rect.width / COLS;
+    return Math.floor(x / colWidth);
 }
 
+/* Clic (PC) */
 canvas.addEventListener("click", e => {
+    if (touchUsed) return;
     if (!playerTurn || gameOver) return;
-    const col = getColumnFromEvent(e);
+
+    const col = getColumnFromClientX(e.clientX);
     dropPiece(col, 1);
 });
 
+/* Touch (mobile) */
 canvas.addEventListener("touchstart", e => {
+    touchUsed = true;
+    e.preventDefault();
+
     if (!playerTurn || gameOver) return;
 
     const touch = e.touches[0];
-    const rect = canvas.getBoundingClientRect();
-    const x = touch.clientX - rect.left;
-
-    const CELL = getCellSize();
-    const col = Math.floor(x / CELL);
-
+    const col = getColumnFromClientX(touch.clientX);
     dropPiece(col, 1);
-});
-/* --------------------------------------------------------- */
+
+    setTimeout(() => touchUsed = false, 120);
+}, { passive: false });
+
+/* ---------------------------------------------------------------------- */
 
 replayBtn.onclick = () => {
     replayBtn.style.display = "none";
@@ -67,7 +69,6 @@ replayBtn.onclick = () => {
 
 function resetBoard() {
 
-    // 🔥 Si le joueur a gagné 5 manches → 1 victoire enregistrée
     if (scorePlayer >= 5) {
         statusLabel.textContent = "CONGRATULATIONS! You've won!";
         saveMatchWin();
@@ -102,8 +103,8 @@ function drawBoard() {
             if (board[r][c] === 1) color = "red";
             if (board[r][c] === 2) color = "blue";
 
-            const cx = c * CELL + CELL/2;
-            const cy = r * CELL + CELL/2;
+            const cx = c * CELL + CELL / 2;
+            const cy = r * CELL + CELL / 2;
 
             ctx.beginPath();
             ctx.arc(cx, cy, radius, 0, Math.PI * 2);
@@ -121,6 +122,7 @@ function getRow(col) {
 
 function dropPiece(col, player) {
     if (gameOver) return;
+    if (col < 0 || col >= COLS) return;
 
     const row = getRow(col);
     if (row === -1) return;
@@ -134,7 +136,7 @@ function dropPiece(col, player) {
         drawBoard();
 
         ctx.beginPath();
-        ctx.arc(col * CELL + CELL/2, y + CELL/2, radius, 0, Math.PI * 2);
+        ctx.arc(col * CELL + CELL / 2, y + CELL / 2, radius, 0, Math.PI * 2);
         ctx.fillStyle = player === 1 ? "red" : "blue";
         ctx.fill();
 
