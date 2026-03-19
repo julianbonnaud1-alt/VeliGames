@@ -180,3 +180,45 @@ h1 {
     border-color: rgba(255, 255, 255, 0.01);
     transform: scale(1.15);
 }
+
+
+@media (max-width: 600px) {
+
+    /* Le titre devient plus petit */
+    h1 {
+        font-size: 28px;
+        text-align: center;
+    }
+
+    /* Les images du menu */
+    .game-card img {
+        width: 120px;
+        height: 120px;
+    }
+
+    /* Les cartes de jeux */
+    .game-card {
+        width: 140px;
+        margin: 10px auto;
+    }
+
+    /* Le texte sous les images */
+    .game-card p {
+        font-size: 14px;
+    }
+
+    /* La barre de score */
+    #scoreBar {
+        font-size: 14px;
+        padding: 6px 0;
+    }
+
+    /* Le bouton ⚙️ */
+    .resetBtn {
+        bottom: 10px;
+        right: 10px;
+        width: 24px;
+        height: 24px;
+        font-size: 14px;
+    }
+}

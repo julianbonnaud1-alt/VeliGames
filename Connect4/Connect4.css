@@ -106,3 +106,10 @@ h1 {
     font-size: 22px;
     font-weight: bold;
 }
+
+@media (max-width: 600px) {
+    canvas {
+        width: 100% !important;
+        height: auto !important;
+    }
+}
