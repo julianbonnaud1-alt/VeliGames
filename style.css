@@ -215,3 +215,10 @@ h1 {
     }
 }
 
+@media (max-width: 600px) {
+    h1 {
+        font-size: 45px;   /* Ajuste ici la taille que tu veux */
+        margin-top: 20px;
+    }
+}
+
