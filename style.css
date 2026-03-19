@@ -184,56 +184,33 @@ h1 {
 
 @media (max-width: 600px) {
 
-    /* Titre plus petit */
-    h1 {
-        font-size: 40px;
-        margin-top: 20px;
-    }
-
-    /* Grille : 1 jeu par ligne */
+    /* 1 seule colonne */
     #gamesContainer {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
         gap: 20px;
         margin-top: 20px;
     }
 
-    /* Case de jeu plus petite */
+    /* Case de jeu adaptée */
     .gameBtn {
-        width: 90%;
-        height: auto;
-        padding: 10px;
+        width: 90% !important;
+        height: auto !important;
         margin: 0 auto;
-    }
-
-    /* Titre du jeu */
-    .gameTitle {
-        font-size: 20px;
-        margin-bottom: 8px;
+        padding: 10px;
     }
 
     /* Image plus petite */
     .gameImg {
-        width: 70%;
+        width: 70% !important;
     }
 
-    /* Description */
+    /* Titre plus petit */
+    .gameTitle {
+        font-size: 20px;
+    }
+
+    /* Description plus petite */
     .tooltip {
-        font-size: 14px;
-        width: 85%;
-    }
-
-    /* Barre de score */
-    #scoreBar {
-        font-size: 14px;
-        padding: 6px 0;
-    }
-
-    /* Bouton ⚙️ */
-    .resetBtn {
-        bottom: 10px;
-        right: 10px;
-        width: 24px;
-        height: 24px;
         font-size: 14px;
     }
 }
