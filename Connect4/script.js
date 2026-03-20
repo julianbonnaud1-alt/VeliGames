@@ -1,5 +1,23 @@
 console.log("Connect Four JS loaded!");
 
+// --- SON DE VICTOIRE (sans fichier audio) ---
+function winSound() {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.type = "triangle";
+    osc.frequency.value = 400;
+    gain.gain.value = 0.25;
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start();
+    osc.frequency.exponentialRampToValueAtTime(900, ctx.currentTime + 0.25);
+    osc.stop(ctx.currentTime + 0.3);
+}
+
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
@@ -32,10 +50,7 @@ let touchUsed = false;
 function getColumnFromClientX(clientX) {
     const rect = canvas.getBoundingClientRect();
 
-    // Position du doigt dans l'écran
     const xScreen = clientX - rect.left;
-
-    // Conversion en coordonnées du canvas (570px)
     const xCanvas = xScreen * (canvas.width / rect.width);
 
     const CELL = getCellSize();
@@ -154,6 +169,8 @@ function dropPiece(col, player) {
             drawBoard();
 
             if (checkWin(player)) {
+
+                winSound(); // 🔊 SON QUAND 4 ALIGNÉS
 
                 if (player === 1) scorePlayer++;
                 else scoreBot++;

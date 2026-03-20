@@ -1,5 +1,23 @@
 console.log("JS loaded!");
 
+// --- SON DE VICTOIRE (sans fichier) ---
+function winSound() {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.type = "triangle";
+    osc.frequency.value = 500;
+    gain.gain.value = 0.25;
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start();
+    osc.frequency.exponentialRampToValueAtTime(1200, ctx.currentTime + 0.25);
+    osc.stop(ctx.currentTime + 0.3);
+}
+
 const SIZE = 3;
 let board = [];
 let movesX = [];
@@ -86,6 +104,8 @@ function handleMove(row, col) {
 
 function endGame(symbol, winCells) {
     gameOver = true;
+
+    winSound(); // 🔊 SON DE VICTOIRE
 
     if (symbol === "X") scoreX++;
     else scoreO++;

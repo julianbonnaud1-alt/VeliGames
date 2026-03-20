@@ -1,5 +1,40 @@
 console.log("Pong JS loaded!");
 
+// --- SONS SANS FICHIERS (Web Audio API) ---
+function hitSound() {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.type = "square";
+    osc.frequency.value = 350;
+    gain.gain.value = 0.25;
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start();
+    osc.stop(ctx.currentTime + 0.07);
+}
+
+function scoreSound() {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.type = "sawtooth";
+    osc.frequency.value = 180;
+    gain.gain.value = 0.3;
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start();
+    osc.frequency.exponentialRampToValueAtTime(60, ctx.currentTime + 0.25);
+    osc.stop(ctx.currentTime + 0.3);
+}
+
+// CANVAS
 const canvas = document.getElementById("pongCanvas");
 const ctx = canvas.getContext("2d");
 
@@ -162,6 +197,8 @@ function update() {
 }
 
 function pointScored() {
+    scoreSound(); // 🔊 SON DE BUT
+
     checkGameOver();
 
     if (gameOver) {
@@ -185,6 +222,8 @@ function intersects(a, b) {
 }
 
 function bounce(leftPaddle) {
+    hitSound(); // 🔊 SON DE COLLISION
+
     const angles = [-20, 0, 20];
     const offset = angles[Math.floor(Math.random() * angles.length)];
     const angleRad = offset * Math.PI / 180;
@@ -205,7 +244,6 @@ function checkGameOver() {
         const winner = player1Score > player2Score ? "Player" : "Bot";
         gameText.textContent = `${winner} wins!`;
 
-        // 🔥 Si le joueur gagne → 1 victoire enregistrée
         if (winner === "Player") saveMatchWin();
     }
 }
@@ -246,10 +284,10 @@ document.addEventListener("keyup", e => {
     if (e.key === "s") sPressed = false;
 });
 
+/* 🎮 Touch Controls */
 document.getElementById("btnUp").addEventListener("touchstart", () => {
     touchUp = true;
 
-    // 🔥 Lancer la balle avec le bouton ▲
     if (waitingForStart && !gameOver) {
         waitingForStart = false;
         gameText.textContent = "";
@@ -270,6 +308,7 @@ document.getElementById("btnUp").addEventListener("touchend", () => {
 document.getElementById("btnDown").addEventListener("touchstart", () => {
     touchDown = true;
 });
+
 document.getElementById("btnDown").addEventListener("touchend", () => {
     touchDown = false;
 });
