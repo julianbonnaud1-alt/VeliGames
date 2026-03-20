@@ -27,10 +27,9 @@
             <h2 class="gameTitle">Tic‑Tac‑Toe</h2>
             <img src="pictures/Morpion.png" alt="TIC-TAC-TOE" class="gameImg">
             <span class="tooltip">
-                Three-Piece Tic-Tac-Toe is a fast-paced variation in which each player can have only three pieces on the board.
-                When a fourth piece is placed, the oldest one is removed; it will be marked in red.
-                The goal is to line up three symbols.
-                First to win 5 rounds wins the match.
+				Infinite Tic-Tac-Toe uses only three pieces per player: placing a fourth makes the first one disappear.
+				The goal is to align three symbols to win each round. 
+				Matches are fast and strategic, and the first player to win 5 rounds claims overall victory in the game.
             </span>
         </a>
 
@@ -39,8 +38,9 @@
             <h2 class="gameTitle">Connect Four</h2>
             <img src="pictures/Connect4.png" alt="Connect Four" class="gameImg">
             <span class="tooltip">
-                Connect Four is a strategic duel where players drop colored discs into a vertical grid.
-                First to win 5 rounds wins the match.
+				Connect 4 pits the player against a bot that drops its token into the gridto form a line of four.
+				Each round requires smart planning and good timing.
+				Matches play out quickly, and the first competitor to secure 5 victories wins to entire game.
             </span>
         </a>
 
@@ -49,8 +49,10 @@
             <h2 class="gameTitle">Pong</h2>
             <img src="pictures/Pong.png" alt="Pong" class="gameImg">
             <span class="tooltip">
-                Classic Pong with modern physics and AI.
-                First to score 5 points wins the match.
+				Pong puts the player against a bot that tries to return the ball with precision.
+				Each rally becomes faster, demanding sharp reflexes and control. 
+				The objective is simple: score five points before the opponent. 
+				The first to reach 5 goals wins the entire match.
             </span>
         </a>
 
@@ -84,17 +86,17 @@
             const TicTacToe = localStorage.getItem("wins_TicTacToe") || 0;
             const connect4 = localStorage.getItem("wins_connect4") || 0;
             const pong = localStorage.getItem("wins_pong") || 0;
-            <!-- const simon = localStorage.getItem("wins_simon") || 0;
-            <!-- const aim = localStorage.getItem("wins_aim") || 0;
-            <!-- const naval = localStorage.getItem("wins_naval") || 0;
+             const simon = localStorage.getItem("wins_simon") || 0;
+             const aim = localStorage.getItem("wins_aim") || 0;
+             const naval = localStorage.getItem("wins_naval") || 0;
 
             const baseText =
                 `<span>TicTacToe: ${TicTacToe} wins</span>` +
                 `<span>Connect Four: ${connect4} wins</span>` +
-                `<span>Pong: ${pong} wins</span>`;
-               <!-- `<span>Simon: ${simon} levels</span>` +
-               <!-- `<span>Aim Trainer: ${aim} score</span>` +
-               <!-- `<span>Naval Battle: ${naval} wins</span>`;
+                `<span>Pong: ${pong} wins</span>`+
+                `<span>Simon: ${simon} levels</span>` +
+                `<span>Aim Trainer: ${aim} score</span>` +
+                `<span>Naval Battle: ${naval} wins</span>`;
 
 		document.getElementById("scoreText").innerHTML = baseText + baseText;        }
 	
@@ -105,9 +107,9 @@
 		localStorage.removeItem("wins_TicTacToe");
 		localStorage.removeItem("wins_connect4");
 		localStorage.removeItem("wins_pong");
-		<!--localStorage.removeItem("wins_simon");
-		<!--localStorage.removeItem("wins_aim");
-		<!--localStorage.removeItem("wins_naval");
+		localStorage.removeItem("wins_simon");
+		localStorage.removeItem("wins_aim");
+		localStorage.removeItem("wins_naval");
 
 		loadScores(); // recharge la bande défilante
 	}
@@ -141,9 +143,9 @@ function tryReset() {
         localStorage.removeItem("wins_TicTacToe");
         localStorage.removeItem("wins_connect4");
         localStorage.removeItem("wins_pong");
-        <!--localStorage.removeItem("wins_simon");
-        <!--localStorage.removeItem("wins_aim");
-        <!--localStorage.removeItem("wins_naval");
+        localStorage.removeItem("wins_simon");
+        localStorage.removeItem("wins_aim");
+        localStorage.removeItem("wins_naval");
 
         loadScores();
         alert("Scores reset!");
