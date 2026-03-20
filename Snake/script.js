@@ -157,7 +157,6 @@ document.addEventListener("keydown", (e) => {
 
         if (!gameStarted) {
             gameStarted = true;
-            direction = "RIGHT";
         }
 
         if (id==="up" && direction!=="DOWN") direction="UP";
@@ -217,7 +216,7 @@ function gameOver() {
     gameOverText.classList.remove("hidden");
     restartMsg.classList.remove("hidden");
     gameStarted = false;
-    
+
     if (score > best) {
         best = score;
         localStorage.setItem("bestSnakeScore", best);
