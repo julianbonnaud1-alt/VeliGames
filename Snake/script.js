@@ -145,7 +145,6 @@ document.addEventListener("keydown", (e) => {
     if (e.key === "d" && direction !== "LEFT") direction = "RIGHT";
 });
 
-// Boutons tactiles
 ["up","down","left","right"].forEach(id=>{
     document.getElementById(id).onclick = () => {
 
@@ -155,8 +154,10 @@ document.addEventListener("keydown", (e) => {
             return;
         }
 
+        // Démarrage normal
         if (!gameStarted) {
             gameStarted = true;
+            direction = "UP";
         }
 
         if (id==="up" && direction!=="DOWN") direction="UP";
@@ -165,6 +166,7 @@ document.addEventListener("keydown", (e) => {
         if (id==="right" && direction!=="LEFT") direction="RIGHT";
     };
 });
+
 
 function draw() {
     ctx.fillStyle = "#111";

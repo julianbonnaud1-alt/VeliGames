@@ -143,3 +143,25 @@ body {
         display: none;
     }
 }
+/* VERSION MOBILE */
+@media (max-width: 600px) {
+
+    body {
+        overflow: hidden; /* 🔥 empêche le scroll */
+    }
+
+    #gameCanvas {
+        width: 260px;
+        height: 260px;
+    }
+
+    .controls button {
+        width: 90px;
+        height: 90px;
+        font-size: 42px;
+    }
+
+    .middle-row {
+        gap: 50px;
+    }
+}
