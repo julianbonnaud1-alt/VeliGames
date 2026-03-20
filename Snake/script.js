@@ -105,7 +105,7 @@ function drawFood() {
 }
 
 function initGame() {
-    snake = [{ x: 10 * box, y: 10 * box }];
+    snake = [{ x: 8 * box, y: 8 * box }];
     direction = null;
     score = 0;
     gameStarted = false;
@@ -115,8 +115,8 @@ function initGame() {
     restartMsg.classList.add("hidden");
 
     food = {
-        x: Math.floor(Math.random() * 20) * box,
-        y: Math.floor(Math.random() * 20) * box
+        x: Math.floor(Math.random() * 16) * box,
+        y: Math.floor(Math.random() * 16) * box
     };
 
     if (gameLoop) clearInterval(gameLoop);
@@ -148,6 +148,12 @@ document.addEventListener("keydown", (e) => {
 // Boutons tactiles
 ["up","down","left","right"].forEach(id=>{
     document.getElementById(id).onclick = () => {
+
+        // 🔥 Restart mobile : bouton HAUT
+        if (id === "up" && !gameStarted) {
+            initGame();
+            return;
+        }
 
         if (!gameStarted) {
             gameStarted = true;
@@ -196,8 +202,8 @@ function draw() {
         playCrunch();
 
         food = {
-            x: Math.floor(Math.random() * 20) * box,
-            y: Math.floor(Math.random() * 20) * box
+            x: Math.floor(Math.random() * 16) * box,
+            y: Math.floor(Math.random() * 16) * box
         };
     } else {
         snake.pop();

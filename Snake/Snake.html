@@ -23,17 +23,19 @@
 </div>
 
 <div id="gameOver" class="hidden">GAME OVER</div>
-<div id="restartMsg" class="hidden">Press SPACE to restart</div>
+<div id="restartMsg" class="hidden">Press SPACE or UP to restart</div>
 
-<canvas id="gameCanvas" width="400" height="400"></canvas>
+<!-- Canvas plus petit pour mobile -->
+<canvas id="gameCanvas" width="320" height="320"></canvas>
 
+<!-- Contrôles mobile plus gros -->
 <div class="controls">
-    <button id="up"></button>
+    <button id="up">▲</button>
     <div class="middle-row">
-        <button id="left"></button>
-        <button id="right"></button>
+        <button id="left">◀</button>
+        <button id="right">▶</button>
     </div>
-    <button id="down"></button>
+    <button id="down">▼</button>
 </div>
 
 <script src="script.js"></script>
