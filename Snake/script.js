@@ -216,7 +216,8 @@ function gameOver() {
     clearInterval(gameLoop);
     gameOverText.classList.remove("hidden");
     restartMsg.classList.remove("hidden");
-
+    gameStarted = false;
+    
     if (score > best) {
         best = score;
         localStorage.setItem("bestSnakeScore", best);
