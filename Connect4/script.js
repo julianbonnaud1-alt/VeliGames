@@ -19,6 +19,12 @@ const scoreLabel = document.getElementById("score");
 const replayBtn = document.getElementById("replay");
 const statusLabel = document.getElementById("status");
 
+/* 🔥 Sauvegarde des victoires (1 victoire = 5 points) */
+function saveMatchWin() {
+    let wins = Number(localStorage.getItem("wins_connect4") || 0);
+    localStorage.setItem("wins_connect4", wins + 1);
+}
+
 /* ------------------ CLICK + TOUCH FIX ------------------ */
 
 let touchUsed = false;

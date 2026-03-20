@@ -11,6 +11,12 @@ function getAudioCtx() {
     return audioCtx;
 }
 
+/* 🔥 Sauvegarde des victoires (1 score = 1 points) */
+function saveMatchWin() {
+    let wins = Number(localStorage.getItem("wins_SimonSays") || 0);
+    localStorage.setItem("wins_SimonSays", wins + 1);
+}
+
 // Fréquences classiques du vrai Simon (en Hz)
 const FREQS = [415.30, 310.00, 252.00, 209.00];
 

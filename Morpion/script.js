@@ -14,8 +14,8 @@ const boardDiv = document.getElementById("board");
 
 /* 🔥 Sauvegarde des victoires */
 function saveMatchWin() {
-    let wins = Number(localStorage.getItem("wins_morpion") || 0);
-    localStorage.setItem("wins_morpion", wins + 1);
+    let wins = Number(localStorage.getItem("wins_TicTacToe") || 0);
+    localStorage.setItem("wins_TicTacToe", wins + 1);
 }
 
 function startGame() {
