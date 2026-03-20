@@ -119,61 +119,6 @@
 	}
 	</script>
 
-<!-- Bouton admin -->
-<button id="resetScores" class="resetBtn" onclick="tryReset()">⚙️</button>
-
-
-	<script>
-let attempts = 0;
-const MAX_ATTEMPTS = 3;
-
-function tryReset() {
-
-    if (attempts >= MAX_ATTEMPTS) {
-        alert("Too many attempts. Access locked.");
-        return;
-    }
-
-    const SECRET = "ESAIP2028"; // Ton code secret
-
-    const code = prompt("Enter admin code:");
-
-    // Si l'utilisateur annule → rien
-    if (code === null) return;
-
-    if (code === SECRET) {
-
-        // Reset des scores
-        localStorage.removeItem("wins_TicTacToe");
-        localStorage.removeItem("wins_connect4");
-        localStorage.removeItem("wins_pong");
-        localStorage.removeItem("wins_SimonSays");
-        localStorage.removeItem("wins_aim");
-        localStorage.removeItem("wins_naval");
-
-        loadScores();
-        alert("Scores reset!");
-        attempts = 0;
-        return;
-    }
-
-    //Mauvais code
-    attempts++;
-
-    if (attempts >= MAX_ATTEMPTS) {
-        alert("Too many wrong attempts. Access locked.");
-
-        // Désactive le bouton
-        const btn = document.getElementById("resetScores");
-        btn.style.pointerEvents = "none";
-        btn.style.opacity = "0.3";
-        return;
-    }
-
-    alert(`Wrong code (${attempts}/3)`);
-}
-</script>
-
 
 </body>
 </html>
