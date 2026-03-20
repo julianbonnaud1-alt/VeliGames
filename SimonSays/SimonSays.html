@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simon Says – VeliGames</title>
+    <link rel="stylesheet" href="SimonSays.css">
+</head>
+<body>
+
+<a href="../index.html" id="homeBtn">HOME</a>
+
+<div id="scanline"></div>
+
+<header>
+    <div id="logo-wrap">
+        <span id="logo-simon">SIMON</span>
+        <span id="logo-says">SAYS</span>
+    </div>
+    <p id="subtitle">Watch · Remember · Repeat</p>
+</header>
+
+<div id="score-wrap">
+    <div class="score-box">
+        <span class="score-num" id="score-current">0</span>
+        <span class="score-label">Round</span>
+    </div>
+    <div class="score-box">
+        <span class="score-num" id="score-best">0</span>
+        <span class="score-label">Best</span>
+    </div>
+</div>
+
+<div id="status">Press START to play</div>
+
+<div id="simon-ring">
+    <div class="pad" id="pad-green"  data-index="0"></div>
+    <div class="pad" id="pad-red"    data-index="1"></div>
+    <div class="pad" id="pad-yellow" data-index="2"></div>
+    <div class="pad" id="pad-blue"   data-index="3"></div>
+    <div id="hub">
+        <button id="startBtn">START</button>
+        <div id="hub-ring"></div>
+    </div>
+</div>
+
+<div id="speed-wrap">
+    <span class="speed-label">SPEED</span>
+    <div id="speed-dots">
+        <div class="dot" id="dot-0"></div>
+        <div class="dot" id="dot-1"></div>
+        <div class="dot" id="dot-2"></div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
