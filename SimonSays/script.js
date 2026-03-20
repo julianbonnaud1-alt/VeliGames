@@ -11,11 +11,6 @@ function getAudioCtx() {
     return audioCtx;
 }
 
-/* 🔥 Sauvegarde des victoires (1 score = 1 points) */
-function saveMatchWin() {
-    let wins = Number(localStorage.getItem("wins_SimonSays") || 0);
-    localStorage.setItem("wins_SimonSays", wins + 1);
-}
 
 // Fréquences classiques du vrai Simon (en Hz)
 const FREQS = [415.30, 310.00, 252.00, 209.00];
@@ -183,6 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (score > bestRound) {
                     bestRound = score;
                     scoreBestEl.textContent = bestRound;
+                    localStorage.setItem("wins_SimonSays", bestRound);
                 }
 
                 playWinJingle();
@@ -221,6 +217,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (finalScore > bestRound) {
             bestRound = finalScore;
             scoreBestEl.textContent = bestRound;
+            localStorage.setItem("wins_SimonSays", bestRound);
         }
 
         // Flash de tous les pads
