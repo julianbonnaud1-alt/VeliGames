@@ -339,3 +339,19 @@ header { text-align: center; margin: 14px 0 6px; }
     background: var(--orange);
     box-shadow: 0 0 8px rgba(255,109,0,0.7);
 }
+
+#game-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    max-width: 500px; /* optionnel */
+    pointer-events: auto;
+}
