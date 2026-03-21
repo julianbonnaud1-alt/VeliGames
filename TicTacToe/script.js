@@ -30,6 +30,26 @@ const scoreLabel = document.getElementById("score");
 const replayBtn = document.getElementById("replay");
 const boardDiv = document.getElementById("board");
 
+/* 🔥 Création des 9 cases une seule fois */
+function createBoard() {
+    boardDiv.innerHTML = "";
+    for (let i = 0; i < 9; i++) {
+        const cell = document.createElement("div");
+        cell.className = "cell";
+        cell.dataset.index = i;
+        boardDiv.appendChild(cell);
+    }
+
+    document.querySelectorAll(".cell").forEach(cell => {
+        cell.addEventListener("click", () => {
+            const index = Number(cell.dataset.index);
+            const row = Math.floor(index / 3);
+            const col = index % 3;
+            handleMove(row, col);
+        });
+    });
+}
+
 /* 🔥 Sauvegarde des victoires */
 function saveMatchWin() {
     let wins = Number(localStorage.getItem("wins_TicTacToe") || 0);
@@ -50,36 +70,32 @@ function resetBoardOnly() {
     gameOver = false;
 
     boardDiv.classList.remove("board-flash");
-
     replayBtn.style.display = "none";
-    statusLabel.textContent = "First in 5 win !";
+    statusLabel.textContent = "First in 5 wins!";
+
     drawBoard();
 }
 
 function drawBoard() {
-    boardDiv.innerHTML = "";
+    const cells = document.querySelectorAll(".cell");
 
-    for (let i = 0; i < SIZE; i++) {
-        for (let j = 0; j < SIZE; j++) {
+    cells.forEach((cell, index) => {
+        const row = Math.floor(index / 3);
+        const col = index % 3;
+        const value = board[row][col];
 
-            const cell = document.createElement("div");
-            cell.className = "cell";
+        cell.textContent = value === " " ? "" : value;
+        cell.classList.remove("win");
+        cell.style.color = "#e0e8ff";
 
-            let value = board[i][j];
-
-            if (movesX.length > 0 && movesX[0][0] === i && movesX[0][1] === j) {
-                cell.style.color = "red";
-            }
-
-            if (movesO.length > 0 && movesO[0][0] === i && movesO[0][1] === j) {
-                cell.style.color = "red";
-            }
-
-            cell.textContent = value === " " ? "" : value;
-            cell.onclick = () => handleMove(i, j);
-            boardDiv.appendChild(cell);
+        if (movesX.length > 0 && movesX[0][0] === row && movesX[0][1] === col) {
+            cell.style.color = "red";
         }
-    }
+
+        if (movesO.length > 0 && movesO[0][0] === row && movesO[0][1] === col) {
+            cell.style.color = "red";
+        }
+    });
 }
 
 function handleMove(row, col) {
@@ -98,23 +114,20 @@ function handleMove(row, col) {
 
         let winBot = checkWin("O");
         if (winBot) return endGame("O", winBot);
-
     }, 300);
 }
 
 function endGame(symbol, winCells) {
     gameOver = true;
 
-    winSound(); // 🔊 SON DE VICTOIRE
+    winSound();
 
     if (symbol === "X") scoreX++;
     else scoreO++;
 
     if (scoreX >= 5) {
-        statusLabel.textContent = "CONGRATULATIONS! You've won !";
-
-        saveMatchWin(); // 🔥 1 victoire enregistrée
-
+        statusLabel.textContent = "CONGRATULATIONS! You've won!";
+        saveMatchWin();
         boardDiv.classList.add("board-flash");
         replayBtn.style.display = "none";
         updateScore();
@@ -156,7 +169,6 @@ function placeMove(row, col, symbol, moves) {
 
 /* BOT INSANE + erreur 1/15 */
 function botPlayInsane() {
-
     let winMove = findWinningMoveSimulated("O", movesO);
     if (winMove) {
         placeMove(winMove[0], winMove[1], "O", movesO);
@@ -169,7 +181,7 @@ function botPlayInsane() {
         return;
     }
 
-    const makeMistake = Math.random() < (1/15);
+    const makeMistake = Math.random() < (1 / 15);
 
     if (makeMistake) {
         let safeMoves = getSafeMoves();
@@ -231,7 +243,6 @@ function getSafeMoves() {
 }
 
 function findWinningMoveSimulated(player, movesList) {
-
     for (let i = 0; i < SIZE; i++) {
         for (let j = 0; j < SIZE; j++) {
 
@@ -278,8 +289,7 @@ function checkWinSimulated(b, s) {
 }
 
 function checkWin(s) {
-    return checkWinSimulated(board, s) ? 
-        getWinningCells(s) : null;
+    return checkWinSimulated(board, s) ? getWinningCells(s) : null;
 }
 
 function getWinningCells(s) {
@@ -302,5 +312,9 @@ function getWinningCells(s) {
     return null;
 }
 
-/* 🔥 Lancement automatique du jeu au chargement */
+/* Bouton replay */
+replayBtn.addEventListener("click", resetBoardOnly);
+
+/* Lancement */
+createBoard();
 startGame();
