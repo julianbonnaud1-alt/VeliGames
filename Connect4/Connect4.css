@@ -190,37 +190,39 @@ h1 {
     text-transform: uppercase;
 }
 
-/* 📱 MOBILE FIX — Connect4 */
+/* 📱 MOBILE FIX — cadre ajusté */
 @media (max-width: 600px) {
 
-    /* HOME plus petit et plus haut */
+    /* HOME plus petit */
     #homeBtn {
         top: 5px;
         left: 5px;
         transform: scale(0.85);
     }
 
-    /* Le titre descend pour ne plus être caché */
+    /* Titre descend */
     h1 {
         margin-top: 55px;
         font-size: 30px;
         letter-spacing: 3px;
     }
 
-    /* Le conteneur du jeu se recentre */
+    /* Conteneur recentré */
     #game-container {
         top: 55%;
         transform: translate(-50%, -50%);
         width: 100vw;
     }
 
-    /* Le cadre autour du canvas */
-    #canvas-wrapper {
+    /* 🔥 Le cadre devient EXACTEMENT la taille du canvas */
+    #canvas-container {
         width: 90vw;
+        max-width: none;
         padding: 4px;
+        margin: 0 auto;
     }
 
-    /* Le plateau (canvas) devient responsive */
+    /* Plateau responsive */
     #gameCanvas {
         width: 90vw;
         height: auto;
@@ -234,4 +236,3 @@ h1 {
         font-size: 12px;
     }
 }
-
