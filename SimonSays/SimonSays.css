@@ -80,7 +80,8 @@ body {
     border-radius: 6px;
     font-weight: bold;
     text-decoration: none;
-    font-size: 18px;
+    z-index: 1000;
+    border: 1px solid #333;
     transition: 0.2s;
 }
 
@@ -110,12 +111,17 @@ header { text-align: center; margin: 14px 0 6px; }
         0 0 60px rgba(0,230,118,0.2);
     animation: flicker 6s infinite;
 }
+
 #logo-says {
     font-family: 'Orbitron', sans-serif;
-    font-weight: 400;
-    font-size: 28px;
-    letter-spacing: 8px;
-    color: var(--text-muted);
+    font-weight: 900;      
+    font-size: 52px;       
+    letter-spacing: 6px;  
+    color: var(--orange);
+    text-shadow:
+        0 0 10px rgba(162, 119, 55, 0.6),
+        0 0 25px rgba(134, 110, 54, 0.3);
+    animation: flicker 6s infinite; 
 }
 @keyframes flicker {
     0%,19%,21%,23%,25%,54%,56%,100% { opacity: 1; }
@@ -123,9 +129,10 @@ header { text-align: center; margin: 14px 0 6px; }
 }
 
 #subtitle {
-    font-size: 12px;
+    font-family: 'Orbitron', sans-serif; 
+    font-size: 11px;
     letter-spacing: 4px;
-    color: var(--text-muted);
+    color: rgba(150,12,160,1);
     margin-top: 4px;
     text-transform: uppercase;
 }
@@ -157,7 +164,7 @@ header { text-align: center; margin: 14px 0 6px; }
     display: block;
     font-size: 11px;
     letter-spacing: 3px;
-    color: var(--text-muted);
+    color: var(--red);
     margin-top: 4px;
     text-transform: uppercase;
 }
@@ -167,7 +174,7 @@ header { text-align: center; margin: 14px 0 6px; }
     font-family: 'Orbitron', sans-serif;
     font-size: 14px;
     letter-spacing: 3px;
-    color: var(--text-muted);
+    color: var(--yellow);
     margin: 6px 0 16px;
     min-height: 22px;
     text-transform: uppercase;
@@ -325,7 +332,7 @@ header { text-align: center; margin: 14px 0 6px; }
     font-family: 'Orbitron', sans-serif;
     font-size: 11px;
     letter-spacing: 3px;
-    color: var(--text-muted);
+    color: var(--blue);
 }
 #speed-dots { display: flex; gap: 6px; }
 .dot {

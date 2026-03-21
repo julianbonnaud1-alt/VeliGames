@@ -51,12 +51,9 @@ body {
     border-radius: 6px;
     font-weight: bold;
     text-decoration: none;
-    font-size: 18px;
-    transition: 0.2s;
     z-index: 1000;
-    font-family: 'Orbitron', sans-serif;
-    letter-spacing: 2px;
     border: 1px solid #333;
+    transition: 0.2s;
 }
 #homeBtn:hover {
     background: #333;

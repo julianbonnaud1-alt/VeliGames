@@ -9,30 +9,25 @@
     <meta http-equiv="Expires" content="0" />
     <link rel="stylesheet" href="AimTrainer.css">
 </head>
-
 <body>
 
-    <a href="../index.html" id="homeBtn">HOME</a>
-    <h1>Aim Trainer</h1>
+<div id="scanline"></div>
+<a href="../index.html" id="homeBtn">HOME</a>
+<h1>Aim Trainer</h1>
 
-    <!-- TIMER GÉANT -->
-    <div id="bigTimer">15.0</div>
+<div id="bigTimer">15.0</div>
+<div id="status">Click the red circle to score points!</div>
 
-    <!-- TEXTE STATUS -->
-    <div id="status">Click the red circle to score points!</div>
+<div id="hud">
+    <div>Score: <span id="score" class="value">0</span></div>
+    <div>Best: <span id="bestScore" class="value">0</span></div>
+    <div>Precision: <span id="precision" class="value">0%</span></div>
+    <div>Reaction: <span id="bestReaction" class="value">N/A</span></div>
+</div>
 
-    <!-- HUD -->
-    <div id="hud">
-        <div>Score: <span id="score" class="value">0</span></div>
-        <div>Best Score: <span id="bestScore" class="value">0</span></div>
-        <div>Precision: <span id="precision" class="value">0%</span></div>
-        <div>Best Reaction: <span id="bestReaction" class="value">N/A</span></div>
-    </div>
+<canvas id="gameCanvas"></canvas>
+<button id="startBtn">START</button>
 
-    <canvas id="gameCanvas"></canvas>
-
-    <button id="startBtn">Start</button>
-
-    <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

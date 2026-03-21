@@ -218,11 +218,11 @@ function checkOver() {
     if (p1Score >= MAX_SCORE || p2Score >= MAX_SCORE) {
         over = true;
         if (p1Score > p2Score) {
-            gameText.textContent = "✓ PLAYER WINS!";
+            gameText.textContent = "PLAYER WINS!";
             gameText.style.color = "#ff1744";
             saveWin();
         } else {
-            gameText.textContent = "✗ BOT WINS!";
+            gameText.textContent = "BOT WINS!";
             gameText.style.color = "#2979ff";
         }
     }
