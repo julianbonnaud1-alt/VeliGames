@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+
+body {
+    font-family: 'Orbitron', sans-serif;
+    color: #FFFFFF;
+    text-align: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-attachment: fixed;
+    background-color: #1a1a1a;
+    background-image:
+        linear-gradient(#2d2d2d 1px, transparent 1px),
+        linear-gradient(90deg, #2d2d2d 1px, transparent 1px),
+        radial-gradient(circle, #3a3a3a 2px, transparent 2px);
+    background-size: 40px 40px, 40px 40px, 80px 80px;
+    animation: pixelMove 12s linear infinite;
+}
+
+@keyframes pixelMove {
+    0%   { background-position: 0 0, 0 0, 0 0; }
+    50%  { background-position: 40px 40px, 40px 40px, 80px 80px; }
+    100% { background-position: 0 0, 0 0, 0 0; }
+}
+
+/* CRT scanlines */
+#scanline {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 3px,
+        rgba(0,0,0,0.18) 3px,
+        rgba(0,0,0,0.18) 4px
+    );
+    z-index: 999;
+    opacity: 0.5;
+}
+
+/* HOME */
+#homeBtn {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: black;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 18px;
+    transition: 0.2s;
+    z-index: 1000;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 2px;
+    border: 1px solid #333;
+}
+#homeBtn:hover {
+    background: #333;
+    transform: scale(1.05);
+    border-color: #ff1744;
+    box-shadow: 0 0 10px rgba(255,23,68,0.4);
+}
+
+/* CONTAINER centré */
+#game-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 600px;
+}
+
+/* TITRE */
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 46px;
+    letter-spacing: 6px;
+    color: #ffea00;
+    margin-top: 0;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    text-shadow:
+        0 0 10px rgba(255,234,0,0.7),
+        0 0 30px rgba(255,234,0,0.4),
+        0 0 60px rgba(255,234,0,0.2);
+    animation: flicker 6s infinite;
+}
+
+@keyframes flicker {
+    0%,19%,21%,23%,25%,54%,56%,100% { opacity: 1; }
+    20%,22%,24%,55% { opacity: 0.7; }
+}
+
+/* STATUS */
+#status {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #aec627;
+    margin-bottom: 12px;
+    min-height: 22px;
+    text-transform: uppercase;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+#status.status-player {
+    color: #ff1744;
+    text-shadow: 0 0 8px rgba(255,23,68,0.8), 0 0 20px rgba(255,23,68,0.4);
+}
+
+#status.status-bot {
+    color: #2979ff;
+    text-shadow: 0 0 8px rgba(41,121,255,0.8), 0 0 20px rgba(41,121,255,0.4);
+}
+
+#status.status-draw {
+    color: #ffea00;
+    text-shadow: 0 0 8px rgba(255,234,0,0.8), 0 0 20px rgba(255,234,0,0.4);
+}
+
+/* CANVAS CONTAINER */
+#canvas-container {
+    width: 100%;
+    max-width: 570px;
+    margin: 0 auto;
+    padding: 5px;
+    background: linear-gradient(135deg, #ff1744, #ffea00, #2979ff);
+    border-radius: 10px;
+    box-shadow:
+        0 0 15px rgba(255,23,68,0.5),
+        0 0 30px rgba(255,234,0,0.3),
+        0 0 50px rgba(41,121,255,0.5);
+}
+
+#gameCanvas {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    display: block;
+}
+
+/* REPLAY */
+#replay-container {
+    display: flex;
+    justify-content: center;
+}
+
+#replay {
+    margin-top: 15px;
+    padding: 12px 32px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #1a1000, #0d1020);
+    color: #ffea00;
+    border: 2px solid #ffea00;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(255,234,0,0.5), 0 0 10px rgba(41,121,255,0.3);
+    transition: 0.2s;
+}
+#replay:hover {
+    background: #ffea00;
+    color: #000;
+    box-shadow: 0 0 24px rgba(255,234,0,0.9), 0 0 24px rgba(41,121,255,0.5);
+    transform: scale(1.06);
+}
+
+/* SCORE */
+#score {
+    margin-top: 14px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #aec627;
+    text-transform: uppercase;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+    h1 { font-size: 28px; letter-spacing: 3px; }
+    #status { font-size: 11px; }
+}
