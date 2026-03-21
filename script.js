@@ -16,7 +16,7 @@ function loadScores() {
         `<span>Pong: ${pong} wins</span>` +
         `<span>Simon Says: level ${SimonSays}</span>` +
         `<span>Aim Trainer: ${AimTrainer} points</span>` +
-        `<span>Snake: ${Snake} pojnts</span>`;
+        `<span>Snake: ${Snake} points</span>`;
 
     document.getElementById("scoreText").innerHTML = baseText + baseText;
 }
