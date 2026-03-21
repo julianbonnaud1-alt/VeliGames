@@ -190,8 +190,46 @@ h1 {
     text-transform: uppercase;
 }
 
-/* MOBILE */
+/* 📱 MOBILE — plateau toujours visible */
 @media (max-width: 600px) {
-    h1 { font-size: 28px; letter-spacing: 3px; }
-    #status { font-size: 11px; }
+
+    /* Le conteneur du jeu se centre et s’adapte */
+    #game-container {
+        width: 100vw;
+        max-width: none;
+        transform: translate(-50%, -50%);
+    }
+
+    /* Le cadre autour du canvas */
+    #canvas-wrapper {
+        width: 90vw;      /* prend 90% de la largeur de l’écran */
+        max-width: none;
+        padding: 4px;
+    }
+
+    /* Le canvas du jeu (le plateau) */
+    #gameCanvas {
+        width: 90vw;      /* responsive */
+        height: auto;     /* garde les proportions */
+        max-width: none;
+    }
+
+    /* Titre et textes réduits */
+    h1 {
+        font-size: 28px;
+        letter-spacing: 3px;
+    }
+
+    #status {
+        font-size: 12px;
+    }
+
+    #score {
+        font-size: 12px;
+    }
+
+    #restartBtn {
+        font-size: 11px;
+        padding: 10px 26px;
+    }
 }

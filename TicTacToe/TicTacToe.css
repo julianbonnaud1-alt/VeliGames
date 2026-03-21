@@ -94,6 +94,7 @@ body {
         0 0 50px rgba(41,121,255,0.55);
 }
 
+
 h1 {
     margin-top: 20px;
     margin-bottom: 10px;
@@ -203,4 +204,28 @@ h1 {
 #status.status-waiting {
     color: #cd2e2e;
     text-shadow: none;
+}
+
+/* 📱 MOBILE — plateau toujours visible */
+@media (max-width: 600px) {
+
+    #board {
+        width: 90vw;     /* prend 90% de la largeur de l’écran */
+        height: 90vw;    /* carré parfait */
+        max-width: 360px;
+        max-height: 360px;
+    }
+
+    .cell {
+        font-size: 14vw; /* X et O bien visibles */
+    }
+
+    h1 {
+        font-size: 32px;
+        letter-spacing: 3px;
+    }
+
+    #status {
+        font-size: 14px;
+    }
 }
