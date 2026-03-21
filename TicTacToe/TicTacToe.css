@@ -206,26 +206,38 @@ h1 {
     text-shadow: none;
 }
 
-/* 📱 MOBILE — plateau toujours visible */
+/* 📱 MOBILE FIX — TicTacToe */
 @media (max-width: 600px) {
 
-    #board {
-        width: 90vw;     /* prend 90% de la largeur de l’écran */
-        height: 90vw;    /* carré parfait */
-        max-width: 360px;
-        max-height: 360px;
+    /* HOME plus petit et plus haut */
+    #homeBtn {
+        top: 5px;
+        left: 5px;
+        transform: scale(0.85);
     }
 
-    .cell {
-        font-size: 14vw; /* X et O bien visibles */
-    }
-
+    /* Le titre descend pour ne plus être caché */
     h1 {
-        font-size: 32px;
+        margin-top: 55px;
+        font-size: 30px;
         letter-spacing: 3px;
     }
 
+    /* Le plateau reste carré et visible */
+    #board {
+        width: 90vw;
+        height: 90vw;
+    }
+
+    .cell {
+        font-size: 12vw;
+    }
+
     #status {
-        font-size: 14px;
+        font-size: 12px;
+    }
+
+    #score {
+        font-size: 12px;
     }
 }

@@ -140,8 +140,56 @@ h1 {
     background: rgba(255,255,255,0.2);
     border-color: #fff;
 }
-@media (min-width: 601px) { #touchControls { display: none; } }
+
+/* 📱 MOBILE FIX — Pong */
 @media (max-width: 600px) {
-    h1 { font-size: 28px; letter-spacing: 4px; }
-    #gameText { font-size: 11px; }
+
+    /* HOME plus petit et plus haut */
+    #homeBtn {
+        top: 5px;
+        left: 5px;
+        transform: scale(0.85);
+    }
+
+    /* Titre descend pour ne pas être caché */
+    h1 {
+        margin-top: 55px;
+        font-size: 30px;
+        letter-spacing: 4px;
+    }
+
+    /* Texte sous le titre */
+    #gameText {
+        font-size: 11px;
+        margin-bottom: 8px;
+    }
+
+    /* Conteneur recentré */
+    #game-container {
+        top: 55%;
+        transform: translate(-50%, -50%);
+        width: 100vw;
+        max-width: none;
+    }
+
+    /* Canvas adapté à l’écran */
+    #pongCanvas {
+        width: 90vw;
+        height: auto;
+        max-width: none;
+    }
+
+    /* Boutons tactiles plus petits */
+    #touchControls button {
+        width: 80px;
+        height: 80px;
+        font-size: 22px;
+        border-radius: 20px;
+    }
+
+    #touchControls {
+        bottom: 20px;
+        max-width: 400px;
+        padding: 0 10px;
+    }
 }
