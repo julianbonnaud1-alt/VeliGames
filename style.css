@@ -23,14 +23,22 @@ body {
 }
 
 
-/* Titre principal */
+/* 🎮 STYLE RÉTRO GAMING POUR LE TITRE PRINCIPAL */
 h1 {
-    text-align: center;
+    font-family: 'Press Start 2P', monospace !important;
+    font-size: 42px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #00ffea;
     margin-top: 40px;
-    color: #FFFFFF;
-    font-style: italic;
-	font-size: 80px;
-    text-decoration: underline;
+    text-decoration: none;
+	    text-align: center;
+
+
+    text-shadow:
+        0 0 6px #00ffea,
+        0 0 12px #00ffea,
+        0 0 20px #00ffea;
 }
 
 /* Conteneur des jeux (3 par ligne) */
@@ -216,8 +224,11 @@ h1 {
 
 @media (max-width: 600px) {
     h1 {
-        font-size: 45px;   /* Ajuste ici la taille que tu veux */
         margin-top: 20px;
+        font-size: 28px;
+        margin-top: 20px;
+        letter-spacing: 2px;
+    }
     }
 }
 
