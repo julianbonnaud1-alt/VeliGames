@@ -124,8 +124,14 @@ h1 {
     padding: 0 15px;
     box-sizing: border-box;
     z-index: 9999;
-	display: none !important;
 }
+/* ❌ Cacher les boutons tactiles sur PC */
+@media (min-width: 601px) {
+    #touchControls {
+        display: none !important;
+    }
+}
+
 #touchControls button {
     width: 110px; height: 110px;
     border-radius: 25px;
@@ -186,7 +192,7 @@ h1 {
         height: 80px;
         font-size: 22px;
         border-radius: 20px;
-    }
+		}
 
     #touchControls {
         bottom: 20px;

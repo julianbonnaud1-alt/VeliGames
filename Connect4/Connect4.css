@@ -216,8 +216,8 @@ h1 {
         width: 100vw;
     }
 
-    /* 🔥 Le bon conteneur : canvas-wrapper (pas canvas-container) */
-    #canvas-wrapper {
+    /* 🔥 Le bon conteneur : canvas-container (pas canvas-wrapper) */
+    #canvas-container {
         width: 90vw;
         max-width: none;
         padding: 4px;
