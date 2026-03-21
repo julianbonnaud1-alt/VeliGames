@@ -1,6 +1,6 @@
 console.log("JS loaded!");
 
-// --- SON DE VICTOIRE (sans fichier) ---
+/* --- SON DE VICTOIRE --- */
 function winSound() {
     const ctx = new (window.AudioContext || window.webkitAudioContext)();
     const osc = ctx.createOscillator();
@@ -18,6 +18,7 @@ function winSound() {
     osc.stop(ctx.currentTime + 0.3);
 }
 
+/* --- VARIABLES --- */
 const SIZE = 3;
 let board = [];
 let movesX = [];
@@ -30,12 +31,13 @@ const scoreLabel = document.getElementById("score");
 const replayBtn = document.getElementById("replay");
 const boardDiv = document.getElementById("board");
 
-/* 🔥 Création des 9 cases une seule fois */
+/* --- CRÉATION DES 9 CASES --- */
 function createBoard() {
     boardDiv.innerHTML = "";
+
     for (let i = 0; i < 9; i++) {
         const cell = document.createElement("div");
-        cell.className = "cell";
+        cell.classList.add("cell");
         cell.dataset.index = i;
         boardDiv.appendChild(cell);
     }
@@ -50,12 +52,13 @@ function createBoard() {
     });
 }
 
-/* 🔥 Sauvegarde des victoires */
+/* --- SAUVEGARDE DES VICTOIRES --- */
 function saveMatchWin() {
     let wins = Number(localStorage.getItem("wins_TicTacToe") || 0);
     localStorage.setItem("wins_TicTacToe", wins + 1);
 }
 
+/* --- DÉMARRAGE --- */
 function startGame() {
     scoreX = 0;
     scoreO = 0;
@@ -63,6 +66,7 @@ function startGame() {
     resetBoardOnly();
 }
 
+/* --- RESET DU PLATEAU --- */
 function resetBoardOnly() {
     board = Array.from({ length: SIZE }, () => Array(SIZE).fill(" "));
     movesX = [];
@@ -76,6 +80,7 @@ function resetBoardOnly() {
     drawBoard();
 }
 
+/* --- AFFICHAGE DU PLATEAU --- */
 function drawBoard() {
     const cells = document.querySelectorAll(".cell");
 
@@ -88,16 +93,15 @@ function drawBoard() {
         cell.classList.remove("win");
         cell.style.color = "#e0e8ff";
 
-        if (movesX.length > 0 && movesX[0][0] === row && movesX[0][1] === col) {
+        if (movesX.length && movesX[0][0] === row && movesX[0][1] === col)
             cell.style.color = "red";
-        }
 
-        if (movesO.length > 0 && movesO[0][0] === row && movesO[0][1] === col) {
+        if (movesO.length && movesO[0][0] === row && movesO[0][1] === col)
             cell.style.color = "red";
-        }
     });
 }
 
+/* --- CLIC JOUEUR --- */
 function handleMove(row, col) {
     if (gameOver || board[row][col] !== " ") return;
 
@@ -117,9 +121,9 @@ function handleMove(row, col) {
     }, 300);
 }
 
+/* --- FIN DE PARTIE --- */
 function endGame(symbol, winCells) {
     gameOver = true;
-
     winSound();
 
     if (symbol === "X") scoreX++;
@@ -153,10 +157,12 @@ function endGame(symbol, winCells) {
     updateScore();
 }
 
+/* --- SCORE --- */
 function updateScore() {
     scoreLabel.textContent = `Player: ${scoreX} | Bot: ${scoreO}`;
 }
 
+/* --- PLACER UN COUP --- */
 function placeMove(row, col, symbol, moves) {
     if (moves.length === 3) {
         const old = moves.shift();
@@ -167,53 +173,40 @@ function placeMove(row, col, symbol, moves) {
     moves.push([row, col]);
 }
 
-/* BOT INSANE + erreur 1/15 */
+/* --- BOT INSANE --- */
 function botPlayInsane() {
     let winMove = findWinningMoveSimulated("O", movesO);
-    if (winMove) {
-        placeMove(winMove[0], winMove[1], "O", movesO);
-        return;
-    }
+    if (winMove) return placeMove(winMove[0], winMove[1], "O", movesO);
 
     let blockMove = findWinningMoveSimulated("X", movesX);
-    if (blockMove) {
-        placeMove(blockMove[0], blockMove[1], "O", movesO);
-        return;
-    }
+    if (blockMove) return placeMove(blockMove[0], blockMove[1], "O", movesO);
 
-    const makeMistake = Math.random() < (1 / 15);
-
-    if (makeMistake) {
+    if (Math.random() < 1/15) {
         let safeMoves = getSafeMoves();
         if (safeMoves.length > 0) {
             const [r, c] = safeMoves[Math.floor(Math.random() * safeMoves.length)];
-            placeMove(r, c, "O", movesO);
-            return;
+            return placeMove(r, c, "O", movesO);
         }
     }
 
-    if (board[1][1] === " ") {
-        placeMove(1, 1, "O", movesO);
-        return;
-    }
+    if (board[1][1] === " ") return placeMove(1, 1, "O", movesO);
 
     const corners = [[0,0],[0,2],[2,0],[2,2]];
     const freeCorners = corners.filter(([r,c]) => board[r][c] === " ");
-    if (freeCorners.length > 0) {
+    if (freeCorners.length) {
         const [r,c] = freeCorners[Math.floor(Math.random() * freeCorners.length)];
-        placeMove(r, c, "O", movesO);
-        return;
+        return placeMove(r, c, "O", movesO);
     }
 
     const sides = [[0,1],[1,0],[1,2],[2,1]];
     const freeSides = sides.filter(([r,c]) => board[r][c] === " ");
-    if (freeSides.length > 0) {
+    if (freeSides.length) {
         const [r,c] = freeSides[Math.floor(Math.random() * freeSides.length)];
-        placeMove(r, c, "O", movesO);
-        return;
+        return placeMove(r, c, "O", movesO);
     }
 }
 
+/* --- MOUVEMENTS SÛRS --- */
 function getSafeMoves() {
     let safe = [];
 
@@ -242,6 +235,7 @@ function getSafeMoves() {
     return safe;
 }
 
+/* --- SIMULATIONS --- */
 function findWinningMoveSimulated(player, movesList) {
     for (let i = 0; i < SIZE; i++) {
         for (let j = 0; j < SIZE; j++) {
@@ -270,20 +264,15 @@ function findWinningMoveSimulated(player, movesList) {
 
 function checkWinSimulated(b, s) {
     for (let i = 0; i < SIZE; i++) {
-        if (b[i][0] === s && b[i][1] === s && b[i][2] === s)
-            return true;
+        if (b[i][0] === s && b[i][1] === s && b[i][2] === s) return true;
     }
 
     for (let j = 0; j < SIZE; j++) {
-        if (b[0][j] === s && b[1][j] === s && b[2][j] === s)
-            return true;
+        if (b[0][j] === s && b[1][j] === s && b[2][j] === s) return true;
     }
 
-    if (b[0][0] === s && b[1][1] === s && b[2][2] === s)
-        return true;
-
-    if (b[0][2] === s && b[1][1] === s && b[2][0] === s)
-        return true;
+    if (b[0][0] === s && b[1][1] === s && b[2][2] === s) return true;
+    if (b[0][2] === s && b[1][1] === s && b[2][0] === s) return true;
 
     return false;
 }
@@ -312,9 +301,9 @@ function getWinningCells(s) {
     return null;
 }
 
-/* Bouton replay */
+/* --- REPLAY --- */
 replayBtn.addEventListener("click", resetBoardOnly);
 
-/* Lancement */
+/* --- LANCEMENT --- */
 createBoard();
 startGame();
