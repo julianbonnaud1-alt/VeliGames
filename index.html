@@ -120,7 +120,7 @@
         localStorage.removeItem("wins_SimonSays");
         localStorage.removeItem("wins_AimTrainer");
         localStorage.removeItem("wins_Snake");
-		localStorage.resetItem("aimTrainerBestScore");
+		localStorage.setItem("aimTrainerBestScore", 0);
 		localStorage.resetItem("bestSnakeScore");
 
         loadScores();
