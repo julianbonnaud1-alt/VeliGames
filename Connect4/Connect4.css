@@ -190,7 +190,7 @@ h1 {
     text-transform: uppercase;
 }
 
-/* 📱 MOBILE FIX — cadre ajusté */
+/* 📱 MOBILE FIX — cadre ajusté (version correcte) */
 @media (max-width: 600px) {
 
     /* HOME plus petit */
@@ -214,8 +214,8 @@ h1 {
         width: 100vw;
     }
 
-    /* 🔥 Le cadre devient EXACTEMENT la taille du canvas */
-    #canvas-container {
+    /* 🔥 Le bon conteneur : canvas-wrapper (pas canvas-container) */
+    #canvas-wrapper {
         width: 90vw;
         max-width: none;
         padding: 4px;
@@ -236,3 +236,4 @@ h1 {
         font-size: 12px;
     }
 }
+

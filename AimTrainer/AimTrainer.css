@@ -140,48 +140,44 @@ h1 {
     background: #1864ab;
 }
 
-/* 📱 MOBILE FIX — Aim Trainer (HOME + tailles des cibles) */
+/* 📱 MOBILE FIX — Aim Trainer (HUD visible + HOME + cibles plus petites) */
 @media (max-width: 600px) {
 
-    /* HOME plus petit et plus haut */
+    /* HOME en haut à gauche, visible */
     #homeBtn {
         top: 5px;
         left: 5px;
         transform: scale(0.8);
-        z-index: 2000; /* reste au-dessus mais ne gêne plus */
+        z-index: 3000;
     }
 
-    /* Titre descend pour ne pas être recouvert */
+    /* Titre descend pour laisser la place au HOME */
     h1 {
-        margin-top: 55px;
+        margin-top: 60px;
         font-size: 26px;
+        position: relative;
+        z-index: 2000;
     }
 
-    /* Status plus bas */
-    #status {
-        top: 95px;
+    /* HUD en haut à droite, sur la même ligne que HOME */
+    #hud {
+        top: 5px;
+        right: 5px;
+        transform: scale(0.75);
+        font-size: 13px;
+        gap: 8px;
+        z-index: 2500;
+    }
+
+    /* Status et Timer plus bas */
+    #status,
+    #bigTimer {
+        top: 100px;
         font-size: 18px;
         z-index: 1500;
     }
 
-    /* Timer géant aligné */
-    #bigTimer {
-        top: 95px;
-        font-size: 45px;
-        z-index: 1500;
-    }
-
-    /* HUD réduit et déplacé */
-    #hud {
-        top: 10px;
-        right: 10px;
-        transform: scale(0.8);
-        font-size: 14px;
-        gap: 10px;
-        z-index: 1500;
-    }
-
-    /* Canvas reste plein écran */
+    /* Canvas plein écran */
     #gameCanvas {
         width: 100vw;
         height: 100vh;
@@ -193,16 +189,10 @@ h1 {
         padding: 10px 22px;
     }
 
-    /* 🔥 Cibles et pièges plus petits sur téléphone */
-    .target {
-        width: 45px !important;
-        height: 45px !important;
-    }
-
+    /* 🎯 Cibles et pièges plus petits */
+    .target,
     .trap {
-        width: 45px !important;
-        height: 45px !important;
+        width: 35px !important;
+        height: 35px !important;
     }
-}
-
 }
