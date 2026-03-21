@@ -77,14 +77,14 @@
 				The goal is simple: survive as long as possible by controlling the snake’s movement and avoiding any collision.
 			</span>
         </a>
-<!--
+
         
-        <a href="NavalBattle/NavalBattle.html" class="gameBtn">
-            <h2 class="gameTitle">Naval Battle</h2>
-            <img src="pictures/NavalBattle.png" alt="Naval Battle" class="gameImg">
-            <span class="tooltip">Strategic battleship game.</span>
+        <a href="AimTrainer/AimTrainer.html" class="gameBtn">
+            <h2 class="gameTitle">Aim Trainer</h2>
+            <img src="pictures/AimTrainer.png" alt="Aim Trainer" class="gameImg">
+            <span class="tooltip">Strategic.</span>
         </a>
-		-->
+		
 
     </div>
 
@@ -96,15 +96,17 @@
             const pong = localStorage.getItem("wins_pong") || 0;
             const SimonSays = localStorage.getItem("wins_SimonSays") || 0;
             const Snake = localStorage.getItem("wins_Snake") || 0;
-            const naval = localStorage.getItem("wins_naval") || 0;
+            const AimTrainer = localStorage.getItem("wins_AimTrainer") || 0;
+
 
             const baseText =
-                `<span>TicTacToe: ${TicTacToe} wins</span>` +
+                `<span>Tic-Tac-Toe: ${TicTacToe} wins</span>` +
                 `<span>Connect Four: ${connect4} wins</span>` +
                 `<span>Pong: ${pong} wins</span>`+
                 `<span>Simon Says: ${SimonSays} levels</span>` +
-                `<span>Snake: ${Snake} score</span>` +
-                `<span>Naval Battle: ${naval} wins</span>`;
+                `<span>Aim Trainer: ${AimTrainer} levels</span>` +
+                `<span>Snake: ${Snake} score</span>`;
+
 
 		document.getElementById("scoreText").innerHTML = baseText + baseText;        }
 	
@@ -116,8 +118,8 @@
 		localStorage.removeItem("wins_connect4");
 		localStorage.removeItem("wins_pong");
 		localStorage.removeItem("wins_SimonSays");
+		localStorage.removeItem("wins_AimTrainer");
 		localStorage.removeItem("wins_Snake");
-		localStorage.removeItem("wins_naval");
 
 		loadScores(); // recharge la bande défilante
 	}
