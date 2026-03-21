@@ -14,9 +14,9 @@ function loadScores() {
         `<span>Tic-Tac-Toe: ${TicTacToe} wins</span>` +
         `<span>Connect Four: ${connect4} wins</span>` +
         `<span>Pong: ${pong} wins</span>` +
-        `<span>Simon Says: ${SimonSays} levels</span>` +
-        `<span>Aim Trainer: ${AimTrainer} score</span>` +
-        `<span>Snake: ${Snake} score</span>`;
+        `<span>Simon Says: level ${SimonSays}</span>` +
+        `<span>Aim Trainer: ${AimTrainer} points</span>` +
+        `<span>Snake: ${Snake} pojnts</span>`;
 
     document.getElementById("scoreText").innerHTML = baseText + baseText;
 }
