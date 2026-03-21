@@ -1,5 +1,10 @@
 console.log("Simon Says JS loaded!");
 
+// ─── AJOUT : Fonction resetItem() personnalisée ───────────────────────────────
+localStorage.resetItem = function(key) {
+    localStorage.setItem(key, 0);
+};
+
 // ─── AUDIO ────────────────────────────────────────────────────────────────────
 let audioCtx = null;
 
@@ -10,7 +15,6 @@ function getAudioCtx() {
     }
     return audioCtx;
 }
-
 
 // Fréquences classiques du vrai Simon (en Hz)
 const FREQS = [415.30, 310.00, 252.00, 209.00];
@@ -76,7 +80,10 @@ const PAD_IDS = ["pad-green", "pad-red", "pad-yellow", "pad-blue"];
 let sequence    = [];
 let playerIndex = 0;
 let round       = 0;
-let bestRound   = 0;
+
+// Charger le best score sauvegardé
+let bestRound   = Number(localStorage.getItem("wins_SimonSays") || 0);
+
 let canClick    = false;
 
 function getStepDelay() {
@@ -93,6 +100,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const scoreCurrentEl = document.getElementById("score-current");
     const scoreBestEl    = document.getElementById("score-best");
     const hubRing        = document.getElementById("hub-ring");
+
+    // Afficher le best score au chargement
+    scoreBestEl.textContent = bestRound;
 
     // Attacher les clics sur les pads
     PAD_IDS.forEach((id, idx) => {
@@ -137,11 +147,10 @@ document.addEventListener("DOMContentLoaded", () => {
     function playSequence() {
         let i = 0;
         const delay = getStepDelay();
-        const toneSec = (delay * 0.65) / 1000; // durée du son en secondes
+        const toneSec = (delay * 0.65) / 1000;
 
         function step() {
             if (i >= sequence.length) {
-                // Séquence terminée → au joueur
                 lockPads(false);
                 canClick = true;
                 setStatus("YOUR TURN!", "#a0ffb0");
@@ -165,16 +174,17 @@ document.addEventListener("DOMContentLoaded", () => {
         playTone(idx, toneSec);
 
         if (idx === sequence[playerIndex]) {
-            // ✓ Bonne touche
+
             playerIndex++;
 
             if (playerIndex === sequence.length) {
-                // Séquence complète !
+
                 canClick = false;
                 lockPads(true);
 
                 const score = round;
                 scoreCurrentEl.textContent = score;
+
                 if (score > bestRound) {
                     bestRound = score;
                     scoreBestEl.textContent = bestRound;
@@ -188,7 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 setTimeout(() => nextRound(), 1000);
             }
         } else {
-            // ✗ Mauvaise touche
+
             canClick = false;
             lockPads(true);
 
@@ -198,7 +208,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             setStatus("✗ WRONG!", "#ff1744");
 
-            // Montre la bonne touche
             setTimeout(() => {
                 flashPad(sequence[playerIndex], 600);
                 playTone(sequence[playerIndex], 0.5);
@@ -214,13 +223,13 @@ document.addEventListener("DOMContentLoaded", () => {
         hubRing.classList.remove("active");
 
         const finalScore = round - 1;
+
         if (finalScore > bestRound) {
             bestRound = finalScore;
             scoreBestEl.textContent = bestRound;
             localStorage.setItem("wins_SimonSays", bestRound);
         }
 
-        // Flash de tous les pads
         let flashes = 0;
         const interval = setInterval(() => {
             PAD_IDS.forEach(id => document.getElementById(id).classList.toggle("lit"));

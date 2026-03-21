@@ -88,42 +88,52 @@
 
     </div>
 
-    <script>
-        function loadScores() {
+<script>
+    function loadScores() {
 
-            const TicTacToe = localStorage.getItem("wins_TicTacToe") || 0;
-            const connect4 = localStorage.getItem("wins_connect4") || 0;
-            const pong = localStorage.getItem("wins_pong") || 0;
-            const SimonSays = localStorage.getItem("wins_SimonSays") || 0;
-            const Snake = localStorage.getItem("wins_Snake") || 0;
-            const AimTrainer = localStorage.getItem("wins_AimTrainer") || 0;
+        const TicTacToe = localStorage.getItem("wins_TicTacToe") || 0;
+        const connect4 = localStorage.getItem("wins_connect4") || 0;
+        const pong = localStorage.getItem("wins_pong") || 0;
+        const SimonSays = localStorage.getItem("wins_SimonSays") || 0;
+        const Snake = localStorage.getItem("wins_Snake") || 0;
+        const AimTrainer = localStorage.getItem("wins_AimTrainer") || 0;
 
+        const baseText =
+            `<span>Tic-Tac-Toe: ${TicTacToe} wins</span>` +
+            `<span>Connect Four: ${connect4} wins</span>` +
+            `<span>Pong: ${pong} wins</span>`+
+            `<span>Simon Says: ${SimonSays} levels</span>` +
+            `<span>Aim Trainer: ${AimTrainer} score</span>` +
+            `<span>Snake: ${Snake} score</span>`;
 
-            const baseText =
-                `<span>Tic-Tac-Toe: ${TicTacToe} wins</span>` +
-                `<span>Connect Four: ${connect4} wins</span>` +
-                `<span>Pong: ${pong} wins</span>`+
-                `<span>Simon Says: ${SimonSays} levels</span>` +
-                `<span>Aim Trainer: ${AimTrainer} levels</span>` +
-                `<span>Snake: ${Snake} score</span>`;
+        document.getElementById("scoreText").innerHTML = baseText + baseText;
+    }
 
+    loadScores();
+</script>
 
-		document.getElementById("scoreText").innerHTML = baseText + baseText;        }
-	
+<script>
+    function resetAllScores() {
+        localStorage.removeItem("wins_TicTacToe");
+        localStorage.removeItem("wins_connect4");
+        localStorage.removeItem("wins_pong");
+        localStorage.removeItem("wins_SimonSays");
+        localStorage.removeItem("wins_AimTrainer");
+        localStorage.removeItem("wins_Snake");
+		localStorage.resetItem("aimTrainerBestScore");
+		localStorage.resetItem("bestSnakeScore");
+
         loadScores();
-    </script>
-	<script>
-	function resetAllScores() {
-		localStorage.removeItem("wins_TicTacToe");
-		localStorage.removeItem("wins_connect4");
-		localStorage.removeItem("wins_pong");
-		localStorage.removeItem("wins_SimonSays");
-		localStorage.removeItem("wins_AimTrainer");
-		localStorage.removeItem("wins_Snake");
+    }
 
-		loadScores(); // recharge la bande défilante
-	}
-	</script>
+    // RESET AVEC LA TOUCHE £
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "£") {
+            resetAllScores();
+            console.log("Tous les scores ont été réinitialisés !");
+        }
+    });
+</script>
 
 
 </body>
