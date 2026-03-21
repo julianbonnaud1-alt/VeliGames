@@ -7,7 +7,9 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
-<link rel="stylesheet" href="style.css?v=10">
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
@@ -52,7 +54,7 @@
 				Pong puts the player against a bot that tries to return the ball with precision.
 				Each rally becomes faster, demanding sharp reflexes and control. 
 				The objective is simple: score five points before the opponent. 
-				The first to reach 5 goals wins the entire match.
+				The first to reach 3 goals wins the entire match.
             </span>
         </a>
 
@@ -66,8 +68,20 @@
 				There is no bot here : only your memory, focus, and sense of rhythm determine how far you can progress through the game.
 			</span>
         </a>
-
+		
+		
         <!-- Jeu 5 -->
+		<a href="AimTrainer/AimTrainer.html" class="gameBtn">
+            <h2 class="gameTitle">Aim Trainer</h2>
+            <img src="pictures/AimTrainer.png" alt="Aim Trainer" class="gameImg">
+            <span class="tooltip">
+				The Aim Trainer challenges the player to click the red circle as quickly as possible while avoiding the red square, which costs valuable time.
+				Each round demands precision and fast reflexes.
+				Targets appear rapidly, and only accurate aim allows you to chain points and dominate the game.
+			</span>
+        </a>
+
+        <!-- Jeu 6 -->
         <a href="Snake/Snake.html" class="gameBtn">
             <h2 class="gameTitle">Snake</h2>
             <img src="pictures/Snake.png" alt="Snake" class="gameImg">
@@ -77,18 +91,7 @@
 				The goal is simple: survive as long as possible by controlling the snake’s movement and avoiding any collision.
 			</span>
         </a>
-
-        
-        <a href="AimTrainer/AimTrainer.html" class="gameBtn">
-            <h2 class="gameTitle">Aim Trainer</h2>
-            <img src="pictures/AimTrainer.png" alt="Aim Trainer" class="gameImg">
-            <span class="tooltip">
-				The Aim Trainer challenges the player to click the red circle as quickly as possible while avoiding the red square, which costs valuable time.
-				Each round demands precision and fast reflexes.
-				Targets appear rapidly, and only accurate aim allows you to chain points and dominate the game.
-			</span>
-        </a>
-		
+	
 
     </div>
 
@@ -110,8 +113,8 @@
             `<span>Aim Trainer: ${AimTrainer} score</span>` +
             `<span>Snake: ${Snake} score</span>`;
 
-        document.getElementById("scoreText").innerHTML = baseText + baseText;
-    }
+		document.getElementById("scoreText").innerHTML = baseText + baseText;
+		}
 
     loadScores();
 </script>

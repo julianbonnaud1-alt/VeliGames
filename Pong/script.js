@@ -42,7 +42,7 @@ let ballSpeed  = INITIAL_SPEED;
 let ballXSpeed = 0;
 let ballYSpeed = 0;
 
-const MAX_SCORE = 5;
+const MAX_SCORE = 3;
 let p1Score = 0, p2Score = 0;
 
 let zPressed = false, sPressed = false;

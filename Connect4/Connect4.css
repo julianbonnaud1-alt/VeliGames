@@ -152,6 +152,7 @@ h1 {
 
 /* REPLAY */
 #replay-container {
+    width: 100%;
     display: flex;
     justify-content: center;
 }
@@ -172,6 +173,7 @@ h1 {
     box-shadow: 0 0 10px rgba(255,234,0,0.5), 0 0 10px rgba(41,121,255,0.3);
     transition: 0.2s;
 }
+
 #replay:hover {
     background: #ffea00;
     color: #000;
