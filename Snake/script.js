@@ -16,7 +16,9 @@ const restartMsg = document.getElementById("restartMsg");
 let gameLoop = null;
 let gameStarted = false;
 
-// Son crunch
+// -------------------------
+// 🔊 Son crunch
+// -------------------------
 let audioCtx = null;
 function playCrunch() {
     if (!audioCtx) {
@@ -41,7 +43,36 @@ function playCrunch() {
     osc.stop(audioCtx.currentTime + 0.12);
 }
 
-// Dégradé + écailles
+// -------------------------
+// 🍏 Génération de nourriture SANS spawn dans le serpent
+// -------------------------
+function generateFood() {
+    let newFood;
+    let conflict;
+
+    do {
+        conflict = false;
+
+        newFood = {
+            x: Math.floor(Math.random() * 16) * box,
+            y: Math.floor(Math.random() * 16) * box
+        };
+
+        for (let part of snake) {
+            if (part.x === newFood.x && part.y === newFood.y) {
+                conflict = true;
+                break;
+            }
+        }
+
+    } while (conflict);
+
+    return newFood;
+}
+
+// -------------------------
+// 🎨 Dégradé + écailles
+// -------------------------
 function getSnakeColor(index) {
     const start = { r: 0, g: 255, b: 180 };
     const end   = { r: 0, g: 120, b: 60 };
@@ -55,7 +86,9 @@ function getSnakeColor(index) {
     return `rgb(${r}, ${g}, ${b})`;
 }
 
-// Tête orientée
+// -------------------------
+// 🐍 Tête orientée
+// -------------------------
 function drawHead(x, y) {
     ctx.fillStyle = "#00ffcc";
     ctx.beginPath();
@@ -80,7 +113,9 @@ function drawHead(x, y) {
     }
 }
 
-// Corps avec écailles
+// -------------------------
+// 🐍 Corps avec écailles
+// -------------------------
 function drawBody(x, y, index) {
     ctx.fillStyle = getSnakeColor(index);
 
@@ -94,6 +129,9 @@ function drawBody(x, y, index) {
     ctx.fill();
 }
 
+// -------------------------
+// 🍏 Dessin de la nourriture
+// -------------------------
 function drawFood() {
     ctx.fillStyle = "#ff004c";
     ctx.beginPath();
@@ -104,6 +142,9 @@ function drawFood() {
     ctx.fillRect(food.x + box/2 - 2, food.y + 2, 4, 6);
 }
 
+// -------------------------
+// 🎮 Initialisation du jeu
+// -------------------------
 function initGame() {
     snake = [{ x: 8 * box, y: 8 * box }];
     direction = null;
@@ -114,10 +155,7 @@ function initGame() {
     gameOverText.classList.add("hidden");
     restartMsg.classList.add("hidden");
 
-    food = {
-        x: Math.floor(Math.random() * 16) * box,
-        y: Math.floor(Math.random() * 16) * box
-    };
+    food = generateFood();
 
     if (gameLoop) clearInterval(gameLoop);
 
@@ -126,7 +164,9 @@ function initGame() {
 
 initGame();
 
-// Démarrage + restart ESPACE
+// -------------------------
+// ⌨️ Contrôles clavier (PC)
+// -------------------------
 document.addEventListener("keydown", (e) => {
 
     if (e.key === " ") {
@@ -134,9 +174,16 @@ document.addEventListener("keydown", (e) => {
         return;
     }
 
+    // 🔥 DÉMARRAGE DANS LA DIRECTION DE LA TOUCHE
     if (!gameStarted) {
         gameStarted = true;
-        direction = "RIGHT";
+
+        if (e.key === "z") direction = "UP";
+        if (e.key === "s") direction = "DOWN";
+        if (e.key === "q") direction = "LEFT";
+        if (e.key === "d") direction = "RIGHT";
+
+        return;
     }
 
     if (e.key === "z" && direction !== "DOWN") direction = "UP";
@@ -145,6 +192,9 @@ document.addEventListener("keydown", (e) => {
     if (e.key === "d" && direction !== "LEFT") direction = "RIGHT";
 });
 
+// -------------------------
+// 📱 Contrôles tactiles (mobile)
+// -------------------------
 ["up","down","left","right"].forEach(id=>{
     document.getElementById(id).onclick = () => {
 
@@ -154,10 +204,11 @@ document.addEventListener("keydown", (e) => {
             return;
         }
 
-        // Démarrage normal
+        // 🔥 DÉMARRAGE DANS LA DIRECTION DU BOUTON
         if (!gameStarted) {
             gameStarted = true;
-            direction = "UP";
+            direction = id.toUpperCase(); // "UP", "DOWN", "LEFT", "RIGHT"
+            return;
         }
 
         if (id==="up" && direction!=="DOWN") direction="UP";
@@ -167,7 +218,9 @@ document.addEventListener("keydown", (e) => {
     };
 });
 
-
+// -------------------------
+// 🖥️ Boucle de jeu
+// -------------------------
 function draw() {
     ctx.fillStyle = "#111";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -202,10 +255,7 @@ function draw() {
 
         playCrunch();
 
-        food = {
-            x: Math.floor(Math.random() * 16) * box,
-            y: Math.floor(Math.random() * 16) * box
-        };
+        food = generateFood();
     } else {
         snake.pop();
     }
@@ -213,6 +263,9 @@ function draw() {
     snake.unshift(head);
 }
 
+// -------------------------
+// 💀 Game Over
+// -------------------------
 function gameOver() {
     clearInterval(gameLoop);
     gameOverText.classList.remove("hidden");
