@@ -19,7 +19,6 @@ body {
     100% { background-position: 0 0, 0 0, 0 0; }
 }
 
-
 /* Titre serpent */
 .snake-title {
     font-size: 55px;
@@ -53,6 +52,7 @@ body {
     100% { transform: translateX(0px); }
 }
 
+/* HOME */
 #homeBtn {
     position: absolute;
     top: 15px;
@@ -72,6 +72,7 @@ body {
     transform: scale(1.05);
 }
 
+/* Scoreboard */
 #scoreboard {
     display: flex;
     justify-content: center;
@@ -81,6 +82,7 @@ body {
     text-shadow: 0 0 8px #00fff2;
 }
 
+/* Game Over */
 #gameOver {
     font-size: 38px;
     color: #ff004c;
@@ -99,7 +101,7 @@ body {
     display: none;
 }
 
-/* Canvas plus petit */
+/* Canvas */
 #gameCanvas {
     background: #111;
     border: 4px solid #00ffea;
@@ -107,20 +109,26 @@ body {
     margin-top: 10px;
     width: 480px;
     height: 480px;
-    }
 }
 
-}
-
-/* Boutons tactiles plus gros */
+/* --- CONTROLS MOBILE --- */
 .controls {
     margin-top: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; /* centre UP et DOWN */
     gap: 18px;
 }
 
+/* Ligne du milieu : LEFT à gauche, RIGHT à droite */
+.middle-row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between; /* 🔥 place left à gauche et right à droite */
+    padding: 0 40px; /* espace horizontal */
+}
+
+/* Boutons tactiles */
 .controls button {
     width: 90px;
     height: 90px;
@@ -138,22 +146,18 @@ body {
     color: #111;
 }
 
-.middle-row {
-    display: flex;
-    gap: 50px;
-}
-
-/* Sur PC : cacher les boutons */
+/* PC : cacher les boutons */
 @media (min-width: 700px) {
     .controls {
         display: none;
     }
 }
-/* VERSION MOBILE */
+
+/* MOBILE */
 @media (max-width: 600px) {
 
     body {
-        overflow: hidden; /* 🔥 empêche le scroll */
+        overflow: hidden;
     }
 
     #gameCanvas {
@@ -168,6 +172,6 @@ body {
     }
 
     .middle-row {
-        gap: 50px;
+        padding: 0 30px;
     }
 }
