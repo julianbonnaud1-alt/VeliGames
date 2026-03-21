@@ -198,27 +198,25 @@ function updateStats() {
 }
 
 // ── COUNTDOWN ─────────────────────────────────────────────────────
+const countdownEl = document.getElementById("countdown");
+
 function startCountdown(callback) {
     let count = 3;
-    statusText.textContent = count;
+    countdownEl.textContent = count;
     bigTimer.style.display = "none";
 
     const interval = setInterval(() => {
         count--;
-        if (count > 0)        statusText.textContent = count;
-        else if (count === 0) statusText.textContent = "GO!";
+        if (count > 0)        countdownEl.textContent = count;
+        else if (count === 0) countdownEl.textContent = "GO!";
         else {
             clearInterval(interval);
-            statusText.textContent = "";
-            // ← Remet le status en haut après le countdown
-            statusText.style.top      = "70px";
-            statusText.style.fontSize = "20px";
-            statusText.style.transform = "translateX(-50%)";
+            countdownEl.textContent = "";
             bigTimer.style.display = "block";
             callback();
         }
     }, 1000);
-}
+} 
 // ── GAME LOOP ─────────────────────────────────────────────────────
 function loop() {
     if (!running) return;
@@ -232,6 +230,7 @@ function loop() {
 
 // ── START ─────────────────────────────────────────────────────────
 startBtn.onclick = () => {
+    statusText.remove();
     bestReaction = Infinity;
     bestReactionLabel.textContent = "N/A";
     clicks = 0; totalClicks = 0;
@@ -256,6 +255,7 @@ function endGame() {
     running = false;
     updateStats();
     startBtn.style.display = "block";
+    statusText.style.display = "block"; // ← ajoute ça
     traps = [];
     target.x = -9999; target.y = -9999;
     draw();
