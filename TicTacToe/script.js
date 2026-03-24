@@ -232,10 +232,10 @@ function placeMove(row, col, symbol, moves) {
     moves.push([row, col]);
 }
 
-/* --- BOT AVANCÉ AVEC 1/50 ERREUR --- */
+/* --- BOT AVANCÉ AVEC 1/20 ERREUR --- */
 function botPlayPerfect() {
-    // 1 chance sur 50 de faire une erreur
-    if (Math.random() < 1 / 50) {
+    // 1 chance sur 20 de faire une erreur
+    if (Math.random() < 1 / 20) {
         let randomMoves = [];
         for (let r = 0; r < SIZE; r++) {
             for (let c = 0; c < SIZE; c++) {
