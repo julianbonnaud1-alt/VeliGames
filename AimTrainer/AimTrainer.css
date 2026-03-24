@@ -199,10 +199,10 @@ h1 {
 
 /* MOBILE */
 @media (max-width: 600px) {
-    #homeBtn { top: 5px; left: 5px; transform: scale(0.8); z-index: 3000; }
-    h1 { margin-top: 60px; font-size: 26px; position: relative; z-index: 2000; }
-    #hud { top: 5px; right: 15px; transform: scale(0.75); font-size: 11px; gap: 8px; z-index: 2500; }
-    #status, #bigTimer { top: 100px; font-size: 16px; z-index: 1500; }
+    #homeBtn { top: 1px; left: 5px; transform: scale(0.8); z-index: 3000; }
+    h1 { margin-top: 90px; font-size: 26px; position: relative; z-index: 2000; }
+    #hud { top: 30px; right: 5px; transform: scale(0.75); font-size: 11px; gap: 8px; z-index: 2500; }
+    #status, #bigTimer { top: 130px; font-size: 16px; z-index: 1500; }
     #gameCanvas { width: 100vw; height: 100vh; }
     #startBtn { font-size: 14px; padding: 10px 22px; }
 }
