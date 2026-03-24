@@ -168,7 +168,7 @@ function update() {
     if (sPressed || touchDown) paddle1Y += PADDLE_SPEED;
     paddle1Y = Math.max(0, Math.min(HEIGHT - PADDLE_HEIGHT, paddle1Y));
 
-    if (Math.random() > 1/30) {
+    if (Math.random() > 1/20) {
         const target = ballY + ballSpeed * 1.5 - PADDLE_HEIGHT / 2;
         if (paddle2Y + PADDLE_HEIGHT / 2 < target) paddle2Y += BOT_SPEED;
         if (paddle2Y + PADDLE_HEIGHT / 2 > target) paddle2Y -= BOT_SPEED;
